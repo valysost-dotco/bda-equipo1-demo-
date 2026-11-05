@@ -1,42 +1,17 @@
-# Flask CRUD — Contenerizado
+# Práctica de MapReduce en Apache Hadoop 3.3.6
 
-CRUD de contactos en Flask + MySQL, empaquetado en Docker.
+Repositorio con los scripts de automatización y ejemplos prácticos de MapReduce ejecutados sobre un contenedor Debian en Docker.
 
-## Requisitos
+## Requisitos Previos
+- Docker Desktop
+- Imagen de Debian con OpenJDK 21 y Hadoop 3.3.6
 
-- Docker y Docker Compose instalados
+## Estructura del Proyecto
+- `scripts/run_standalone.sh`: Ejecuta la prueba MapReduce (Grep/WordCount) en modo Standalone.
+- `scripts/run_pseudodistributed.sh`: Prepara HDFS, sube archivos de entrada y ejecuta MapReduce sobre el cluster Pseudo-Distribuido.
+- `data/sample.txt`: Archivo de prueba de datos de entrada.
 
-## Levantar el proyecto
-
-Primera vez (construye la imagen y crea la base de datos):
-
-```bash
-docker-compose up --build
-```
-
-Siguientes veces:
-
-```bash
-docker-compose up
-```
-
-Parar los servicios:
-
-```bash
-docker-compose stop
-```
-
-La app queda disponible en: <http://localhost:8080>
-
-## Servicios
-
-- **mysql** → MySQL 8.0 en el puerto `3306`. El script `sql/db.sql` se ejecuta solo la primera vez para crear la base `flaskcrud` y la tabla `contacts`.
-- **pythonapp** → Flask corriendo en el puerto `8080`, conectado a MySQL por el hostname `mysql` (red interna de Docker Compose).
-
-## Variables de entorno
-
-Las variables se pasan desde `docker-compose.yml`. Si quieres correr fuera de Docker, copia `.env.example` a `.env` y ajusta los valores:
-
-```bash
-cp .env.example .env
-```
+## Ejecución
+1. Modo Standalone:
+   ```bash
+   bash scripts/run_standalone.sh
